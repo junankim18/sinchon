@@ -27,9 +27,14 @@ class Diary(models.Model):
     address = models.CharField(
         verbose_name='주소', max_length=100, null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    title = models.CharField(verbose_name='일기 제목', max_length=100)
     content = models.TextField(blank=True, null=True)
     receiver = models.ForeignKey(
         Profile, related_name='receiver', on_delete=models.CASCADE, blank=True, null=True)
+    block = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title
 
 
 class Comment(models.Model):
