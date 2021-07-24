@@ -34,7 +34,12 @@ class Diary(models.Model):
     content = models.TextField(blank=True, null=True)
     receiver = models.ManyToManyField(
         Profile, related_name='receiver', blank=True)
+<<<<<<< HEAD
     block = models.BooleanField(default=False)
+=======
+        
+
+>>>>>>> master
 
     def __str__(self):
         return self.title
