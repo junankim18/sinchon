@@ -1,0 +1,19 @@
+
+<h1>{{ post.title }}</h1>
+
+<p>{{post.content}}</p>
+<hr>
+<br><br><br><br><br>
+
+<!-- 새 댓글을 입력하는 부분 -->
+<form method='post'>
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <button type="submit">댓글 달기</button>
+</form>
+
+<!-- 기존 댓글을 보여주는 부분 -->
+{% for c in comment_list %}
+<p>{{ c.comment }}</p><hr>
+
+{% endfor %}
