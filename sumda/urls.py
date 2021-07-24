@@ -12,6 +12,7 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('detail/<int:pk>', views.detail, name="detail"),
     path('write', write, name='write'),
+    path('others/', views.others, name='others'),
     
 
 ]

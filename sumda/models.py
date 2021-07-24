@@ -29,9 +29,10 @@ class Diary(models.Model):
     date = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     title = models.CharField(verbose_name='일기 제목', max_length=100)
     content = models.TextField(blank=True, null=True)
-    receiver = models.ForeignKey(
-        Profile, related_name='receiver', on_delete=models.CASCADE, blank=True, null=True)
-    block = models.BooleanField(default=False)
+    receiver = models.ManyToManyField(
+        Profile, related_name='receiver', blank=True)
+        
+
 
     def __str__(self):
         return self.title

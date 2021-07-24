@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.utils import timezone
 from .forms import SignupForm, CommentForm
@@ -13,8 +13,18 @@ from .models import *
 
 
 def main(request):
-    posts = Diary.objects.all()
-    return render(request, 'main.html',  {'posts_list':posts})
+    user = request.user
+    try:
+        profile = Profile.objects.get(user=user)
+        posts = Diary.objects.filter(profile = profile)
+        ctx = {
+            'posts_list':posts
+        }
+    except:
+        ctx = {
+
+        }
+    return render(request, 'main.html', ctx )
 
 #상세보기 페이지 (댓글 폼)
 def detail(request, pk):
@@ -101,3 +111,12 @@ def location(request):
     user = request.user
     profile = Profile.objects.get(user=user)
     return JsonResponse({'latitude': latitude, 'longitude': longitude, 'address': address})
+
+#others페이지 관리함수
+def others(request):
+    random_content = Diary.objects.order_by("?").first()
+    user = request.user
+    profile = Profile.objects.get(user=user)
+    random_content.receiver.add(profile)
+    contents = Diary.objects.filter(receiver=profile)
+    return render(request, 'others.html', {'contents':contents })
