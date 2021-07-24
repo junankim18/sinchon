@@ -1,0 +1,14 @@
+<h3>나에게 온 팔로우 요청</h3>
+{% for req in requests %}
+<p>{{req.nickname}}</p>
+<a href="{% url 'sumda:accept' req.id%}"><button>수락</button></a>
+<a href="{% url 'sumda:reject' req.id%}"><button>거절</button></a>
+{% endfor %}
+<h3>나의 팔로우 목록</h3>
+{% for following in followings %}
+<p>{{following.nickname}}</p>
+{% endfor %}
+<h3>내 팔로워</h3>
+{% for follower in followers %}
+<p>{{follower.nickname}}</p>
+{% endfor %}

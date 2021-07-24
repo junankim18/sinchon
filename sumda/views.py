@@ -14,11 +14,15 @@ from .models import *
 
 def main(request):
     posts = Diary.objects.all()
-    return render(request, 'main.html',  {'posts_list':posts})
+    return render(request, 'main.html',  {'posts_list': posts})
 
-#상세보기 페이지 (댓글 폼)
+# 상세보기 페이지 (댓글 폼)
+
+
 def detail(request, pk):
-    post = get_object_or_404(Diary, pk = pk)
+    post = get_object_or_404(Diary, pk=pk)
+    unknown_profile = post.profile
+    unknown_user = unknown_profile.user
     comment_list = Comment.objects.filter(diary=post)
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)
@@ -26,20 +30,27 @@ def detail(request, pk):
             comment = comment_form.save(commit=False)
             comment.diary = post
             comment.save()
-            return redirect('/detail/'+str(pk) )
-    else :
+            return redirect('/detail/'+str(pk))
+    else:
         comment_form = CommentForm()
-        
-    return render(request, 'detail.html', {'post':post, 'comment_list':comment_list, 'comment_form':comment_form })
-    
+    ctx = {
+        'post': post,
+        'comment_list': comment_list,
+        'comment_form': comment_form,
+        'unknown_user': unknown_user
+    }
+    return render(request, 'detail.html', ctx)
+
 
 def send(request):
     recieved_diary = Diary.objects.filter(receiver=None)
     recieved_diary.receiver = request.user
 
 # 로그인, 회원가입, 로그아웃 기능
+
+
 def signup_view(request):
-    if request.method=="POST":
+    if request.method == "POST":
         form = SignupForm(request.POST)
         if form.is_valid():
             user = form.save()
@@ -49,8 +60,9 @@ def signup_view(request):
             new_profile.save()
             return redirect('/')
     else:
-        form=SignupForm()
-    return render(request, 'signup.html', {'form':form})
+        form = SignupForm()
+    return render(request, 'signup.html', {'form': form})
+
 
 def login_view(request):
     if request.method == 'POST':
@@ -58,17 +70,19 @@ def login_view(request):
         if form.is_valid():
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password")
-            user = authenticate(request=request, username=username, password=password) 
+            user = authenticate(
+                request=request, username=username, password=password)
             if user is not None:
                 login(request, user)
                 return redirect('/')
     else:
         form = AuthenticationForm()
-    return render(request, 'login.html', {'form':form})
-def logout_view(request):
-	logout(request)
-	return redirect('/')
+    return render(request, 'login.html', {'form': form})
 
+
+def logout_view(request):
+    logout(request)
+    return redirect('/')
 
 
 def write(request):
@@ -101,3 +115,53 @@ def location(request):
     user = request.user
     profile = Profile.objects.get(user=user)
     return JsonResponse({'latitude': latitude, 'longitude': longitude, 'address': address})
+
+
+def follow(request, user_pk, diary_pk):
+    user = request.user
+    unknown = User.objects.get(id=user_pk)
+    profile = Profile.objects.get(user=unknown)
+
+    profile.request.add(user)
+    profile.save()
+    return redirect('/detail/'+str(diary_pk))
+
+
+def mypage(request):
+    user = request.user
+    profile = Profile.objects.get(user=user)
+    requests = profile.request.all()
+    # print('-'*100)
+    # print(request)
+    followers = profile.follower.all()
+    followings = profile.following.all()
+    ctx = {
+        'user': user,
+        'profile': profile,
+        'requests': requests,
+        'followers': followers,
+        'followings': followings
+    }
+    return render(request, 'mypage.html', ctx)
+
+
+def accept(request, pk):
+    user = request.user
+    profile = Profile.objects.get(user=user)
+    unknown = User.objects.get(id=pk)
+    unknown_profile = Profile.objects.get(user=unknown)
+    profile.follower.add(unknown)
+    profile.request.remove(unknown)
+    profile.save()
+    unknown_profile.following.add(user)
+    unknown_profile.save()
+    return redirect('/mypage')
+
+
+def reject(request, pk):
+    user = request.user
+    profile = Profile.objects.get(user=user)
+    unknown = User.objects.get(id=pk)
+    profile.request.remove(unknown)
+    profile.save()
+    return redirect('/mypage')

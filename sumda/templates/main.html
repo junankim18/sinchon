@@ -7,15 +7,15 @@
         <title>Document</title>
     </head>
     <body>
-        {% if user.is_authenticated %}
-            <a href="{% url 'sumda:logout' %}">로그아웃하기</a><br><br>
-            {% for post in posts_list %}
-                <a href="{% url 'sumda:detail' pk=post.pk %}">{{post.content}}</a><br><br>
-            {% endfor %}
-            
-        {% else %}
-            <a href="{% url 'sumda:login' %}">로그인하기</a><br><br>
-            <a href="{% url 'sumda:signup' %}">회원가입하기</a><br><br>
+        {% if user.is_authenticated %} {{user}}
+        <a href="{% url 'sumda:logout' %}">로그아웃하기</a><br /><br />
+        <a href="{% url 'sumda:mypage' %}">마이페이지</a>
+        <br />
+        {% for post in posts_list %}
+        <a href="{% url 'sumda:detail' pk=post.pk %}">{{post.content}}</a><br /><br />
+        {% endfor %} {% else %}
+        <a href="{% url 'sumda:login' %}">로그인하기</a><br /><br />
+        <a href="{% url 'sumda:signup' %}">회원가입하기</a><br /><br />
         {% endif %}
 
         <a href="{% url 'sumda:write' %}">write</a>
