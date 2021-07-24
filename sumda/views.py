@@ -13,26 +13,18 @@ from .models import *
 
 
 def main(request):
-<<<<<<< HEAD
     posts = Diary.objects.all()
-    return render(request, 'main.html',  {'posts_list': posts})
-
-# 상세보기 페이지 (댓글 폼)
-
-=======
     user = request.user
     try:
         profile = Profile.objects.get(user=user)
-        posts = Diary.objects.filter(profile = profile)
+        posts = Diary.objects.filter(profile=profile)
         ctx = {
-            'posts_list':posts
+            'posts_list': posts
         }
     except:
-        ctx = {
+        ctx = {}
+    return render(request, 'main.html', ctx)
 
-        }
-    return render(request, 'main.html', ctx )
->>>>>>> master
 
 def detail(request, pk):
     post = get_object_or_404(Diary, pk=pk)
@@ -131,7 +123,6 @@ def location(request):
     profile = Profile.objects.get(user=user)
     return JsonResponse({'latitude': latitude, 'longitude': longitude, 'address': address})
 
-<<<<<<< HEAD
 
 def follow(request, user_pk, diary_pk):
     user = request.user
@@ -181,13 +172,13 @@ def reject(request, pk):
     profile.request.remove(unknown)
     profile.save()
     return redirect('/mypage')
-=======
-#others페이지 관리함수
+# others페이지 관리함수
+
+
 def others(request):
     random_content = Diary.objects.order_by("?").first()
     user = request.user
     profile = Profile.objects.get(user=user)
     random_content.receiver.add(profile)
     contents = Diary.objects.filter(receiver=profile)
-    return render(request, 'others.html', {'contents':contents })
->>>>>>> master
+    return render(request, 'others.html', {'contents': contents})

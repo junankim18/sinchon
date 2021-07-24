@@ -12,15 +12,11 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('detail/<int:pk>', views.detail, name="detail"),
     path('write', write, name='write'),
-<<<<<<< HEAD
     path('mypage', mypage, name='mypage'),
     path('follow/<int:user_pk>/<int:diary_pk>', follow, name='follow'),
     path('accept/<int:pk>', accept, name='accept'),
     path('reject/<int:pk>', reject, name='reject'),
-
-=======
     path('others/', views.others, name='others'),
-    
->>>>>>> master
+
 
 ]
