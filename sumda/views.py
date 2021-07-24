@@ -1,17 +1,14 @@
-<<<<<<< HEAD
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout, authenticate
 from django.utils import timezone
 from .forms import SignupForm, CommentForm
-=======
 import json
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.http import JsonResponse
 from urllib.parse import urlparse
-from django.shortcuts import render, redirect
->>>>>>> b02a3b8fc3ad13c668a8908eafc352982257a22d
+
 from .models import *
 
 
@@ -29,7 +26,7 @@ def detail(request, pk):
             comment = comment_form.save(commit=False)
             comment.diary = post
             comment.save()
-            return redirect('detail', pk = pk)
+            return redirect('/detail/'+str(pk) )
     else :
         comment_form = CommentForm()
         
@@ -40,7 +37,6 @@ def send(request):
     recieved_diary = Diary.objects.filter(receiver=None)
     recieved_diary.receiver = request.user
 
-<<<<<<< HEAD
 # 로그인, 회원가입, 로그아웃 기능
 def signup_view(request):
     if request.method=="POST":
@@ -48,7 +44,10 @@ def signup_view(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('main')
+            new_profile = Profile()
+            new_profile.user = user
+            new_profile.save()
+            return redirect('/')
     else:
         form=SignupForm()
     return render(request, 'signup.html', {'form':form})
@@ -62,16 +61,15 @@ def login_view(request):
             user = authenticate(request=request, username=username, password=password) 
             if user is not None:
                 login(request, user)
-                return redirect('main')
+                return redirect('/')
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {'form':form})
 def logout_view(request):
 	logout(request)
-	return redirect('main')
+	return redirect('/')
 
 
-=======
 
 def write(request):
     user = request.user
@@ -103,4 +101,3 @@ def location(request):
     user = request.user
     profile = Profile.objects.get(user=user)
     return JsonResponse({'latitude': latitude, 'longitude': longitude, 'address': address})
->>>>>>> b02a3b8fc3ad13c668a8908eafc352982257a22d
