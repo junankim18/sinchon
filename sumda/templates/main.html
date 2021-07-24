@@ -7,6 +7,7 @@
         <title>Document</title>
     </head>
     <body>
+<<<<<<< HEAD
         {% if user.is_authenticated %}
             <a href="{% url 'logout' %}">로그아웃하기</a><br><br>
             {% for post in posts_list %}
@@ -18,5 +19,8 @@
             <a href="{% url 'signup' %}">회원가입하기</a><br><br>
         {% endif %}
 
+=======
+        <a href="{% url 'sumda:write' %}">write</a>
+>>>>>>> b02a3b8fc3ad13c668a8908eafc352982257a22d
     </body>
 </html>

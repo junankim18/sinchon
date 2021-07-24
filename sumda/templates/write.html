@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <button onclick="onLocation()">위치 불러오기</button>
+        <form action="{% url 'sumda:write' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="location" style="display: None">
+                <h3><label for="location">위치정보</label></h3>
+                <input class="location_input" name="location" type="text" value="" />
+            </div>
+            <br />
+            <h3>제목</h3>
+            <input type="text" name="title" />
+            <br />
+
+            <h3>닉네임</h3>
+            <input type="text" name="nickname" />
+            <br />
+            <h3>일기쓰기</h3>
+            <textarea name="content" cols="30" rows="10" placeholder="이쁜 일기 써보세요"></textarea>
+
+            <button type="submit">작성하기</button>
+        </form>
+    </body>
+
+    <script
+        type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=46d5f6c310a78632612936d0ea60df74&libraries=services"
+    ></script>
+    <script></script>
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                // GPS를 지원하면
+                navigator.geolocation.getCurrentPosition(
+                    function (position) {
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
+                        const coords = position.coords;
+
+                        var geocoder = new kakao.maps.services.Geocoder();
+                        function searchAddrFromCoords(coords, callback) {
+                            // 좌표로 행정동 주소 정보를 요청합니다
+                            geocoder.coord2RegionCode(coords.longitude, coords.latitude, callback);
+                        }
+                        searchAddrFromCoords(coords, displayCenterInfo);
+
+                        function displayCenterInfo(result, status) {
+                            if (status === kakao.maps.services.Status.OK) {
+                                for (var i = 0; i < result.length; i++) {
+                                    // 행정동의 region_type 값은 'H' 이므로
+                                    if (result[i].region_type === "H") {
+                                        const address = result[0].region_2depth_name;
+                                        console.log(latitude + " " + longitude + " " + address);
+                                        const element = document.querySelector(`.location`);
+                                        element.style.display = "block";
+                                        const input = document.querySelector(`.location_input`);
+                                        input.value = address;
+                                        console.log(element);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    function (error) {
+                        console.error(error);
+                    },
+                    {
+                        enableHighAccuracy: false,
+                        maximumAge: 0,
+                        timeout: Infinity,
+                    }
+                );
+            } else {
+                alert("GPS를 지원하지 않습니다");
+            }
+        }
+        const onLocation = () => {
+            getLocation();
+        };
+    </script>
+</html>
