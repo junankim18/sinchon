@@ -110,18 +110,12 @@ def write(request):
         else:
             pass
         new_diary.save()
-        return redirect('/')
 
+        random_content = Diary.objects.order_by("?").first()
+        profile = Profile.objects.get(user=user)
+        random_content.receiver.add(profile)
 
-@csrf_exempt
-def location(request):
-    req = json.loads(request.body)
-    latitude = req['latitude']
-    longitude = req['longitude']
-    address = req['address']
-    user = request.user
-    profile = Profile.objects.get(user=user)
-    return JsonResponse({'latitude': latitude, 'longitude': longitude, 'address': address})
+    return redirect('/')
 
 
 def follow(request, user_pk, diary_pk):
@@ -176,9 +170,7 @@ def reject(request, pk):
 
 
 def others(request):
-    random_content = Diary.objects.order_by("?").first()
     user = request.user
     profile = Profile.objects.get(user=user)
-    random_content.receiver.add(profile)
-    contents = Diary.objects.filter(receiver=profile)
+    contents = Diary.objects.filter(receiver=profile).order_by('-date')
     return render(request, 'others.html', {'contents': contents})

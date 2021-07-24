@@ -1,5 +1,5 @@
 {% for c in contents %}
-    {{c.title}}
-    <br><br>
+<a href="{% url 'sumda:detail' c.id%}">{{c.title}}</a>
+<br /><br />
 {% endfor %}
-<hr>
+<hr />
