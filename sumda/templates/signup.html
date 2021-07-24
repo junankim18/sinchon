@@ -1,7 +1,47 @@
-<h1>Sign Up</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/53a8c415f1.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="static/css/signup.css">
+</head>
+<body>
+    <nav class="navbar">
+        
+        <div class="navbar_logo">
+            <a href="#">Sumda</a>
+        </div>
+        <hr>
+    </nav>
 
-<form method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">submit</button>
-</form>
+        
+    <form method="POST">
+    <div class="wrap">
+        <div class="signup">
+        <h2>Sign Up</h2>
+            <div class="signup_name">
+                <h4>Nickname</h4>
+                <input type="nickname" placeholder="Nickname">
+            </div>
+            <div class="signup_id">
+                <h4>E-mail</h4>
+                <input type="email" placeholder="Email">
+            </div>
+            <div class="signup_pw">
+                <h4>Password</h4>
+                <input type="password" placeholder="Password">
+            </div>
+            <div class="submit">
+                <button type="submit" value="submit">Submit</button>
+            </div>
+        </div>
+    </div>
+    </form>
+</body>
+</html>
+
+
+

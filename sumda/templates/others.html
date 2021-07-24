@@ -1,5 +1,137 @@
-{% for c in contents %}
-<a href="{% url 'sumda:detail' c.id%}">{{c.title}}</a>
-<br /><br />
-{% endfor %}
-<hr />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    
+    <link rel="stylesheet" href="detail.css">
+    <script src="main.js" defer></script>
+    <script
+    src="https://kit.fontawesome.com/2d323a629b.js"
+    crossorigin="anonymous"
+  ></script><!--아이콘 폰트어썸-->
+    <title>Main</title>
+</head>
+
+<body>
+    <nav class="navbar">
+        
+        <div class="navbar_logo">
+            <i class="fas fa-book"></i>
+            <a href="#">Sumda</a>
+
+        </div>
+
+        <ul class="navbar_menu">
+            <li><a>Library</a></li><!--로그인 o-->
+            <li><a>Mypage</a></li><!--로그인 o-->
+            <li><a>Login</a></li><!--로그인 x-->
+            <li><a>Signup</a></li><!--로그인 x-->
+            <li><a>Logout</a></li><!--로그인 o-->
+            <li><a>More</a></li>
+
+        </ul>
+
+        <div class="navbar_icons">
+            <ul>
+                <li><i class="fab fa-instagram"></i></li><!--그냥 sns 연동-->
+                <li><i class="fas fa-pencil-alt"></i></li><!--새 일기 작성하기/ 로그인 하면 뜨게 설정-->
+            </ul>
+
+        </div>
+
+        <a class="navbar_toggleBtn" href="#"><i class="fas fa-bars"></i></a>
+    </nav>
+
+    <!-- 일기 디테일 보기-->
+
+    
+    <selection class="diary">
+        <div class="wrapper">
+
+            <div class="diary_header">
+              <h4>조금은 고된 하루</h4> <!--제목넣기-->
+              <h5>Written on July 6th</h5> <!--날짜넣기-->
+            </div>
+          
+            <img src="poster1.jpg" height="900px" width="400px"/>
+
+            <div class="text_box">
+            <h1>Text</h1>
+            <p class="text"> 
+
+                즐거운 학교에서 펴낸 <현대소설 너를 읽어주마> 34~51쪽까지 읽었다. 
+                
+                이 책의 첫 번째 단편인 양귀자의 <한계령>은 완독했다.
+         
+                마지막까지 읽었는데도 예전에 읽은 것이 전혀 기억나지 않고
+                
+                처음 읽는 듯한 마음이다.
+                
+                억지로 기억을 되살려보니
+                
+                전에는 아주 힘들게 읽었던 듯하다.
+    
+                그렇다면 이번에는?
+                
+                두 가지 면에서 흥미있었다.
+         
+                첫째, 작중 화자가 고향 친구의 전화를 받고 과거를 회상하는 장면은
+                
+                마치 나의 일인듯 공감이 갔고,
+                
+                둘째, 교과서에 나오는 <원미동 사람들>의 등장인물들을
+                
+                곳곳에서 확인하면서 반가움을 느꼈고,
+                
+                <원미동 사람들>의 배경을 보다 확실히 그릴 수 있었다.
+
+                힘들었던 점은 마지막 장면이었다.
+                
+                작중화자가 결국은 옛친구를 찾아가서 
+                
+                찐빵집 딸 '박미화'에서 밤무대 무명가수 '미나박'을 확인할 
+                
+                그 때 작중화자가 느끼는 마음이 금새 마음에 와 닿지 않았다.
+                두어 번 반복하여 읽고,
+                
+                책 옆의 주해(수험생을 위한 책이므로 주해가 잘 되어 있음)를 읽고서야
+                
+                어느 정도 이해는 갔다
+
+                그래도 작가와 같은 정도로 몰입하지 못 한 것은
+                
+                이 책에서 소재 이상의 의미를 갖고 있는 두 노래,
+                
+                <검은 상처의 블루스>와 <한계령>에 대해
+                
+                내가 아는 바가 없기 때문이다.</p>
+            </div>
+            
+            <hr>
+
+            <class class="comment_box">
+
+                <h1>Comment</h1>
+
+                <p class="comment">오늘은 어쩌구 저쩌구 블라블라 ㅁㄴㄹㄴㄹㄴㅁㄹㄴㄹㄴㅁㄹㄴㄹ
+                ㄴㅁㄹㄴㄹㄴㅁㄹ오늘은 어쩌구 저쩌구 블라블라 ㅁㄴㄹㄴㄹㄴㅁㄹㄴㄹㄴㅁㄹㄴㄹ
+                ㄴㅁㄹㄴㄹㄴㅁㄹ오늘은 어쩌구 저쩌구 블라블라 ㅁㄴㄹㄴㄹㄴㅁㄹㄴㄹㄴㅁㄹㄴㄹ
+                ㄴㅁㄹㄴㄹㄴㅁㄹ 
+                
+                오늘은 어쩌구 저쩌구 블라블라 ㅁㄴㄹㄴㄹㄴㅁㄹㄴㄹㄴㅁㄹㄴㄹ
+                ㄴㅁㄹㄴㄹㄴㅁㄹ</p>
+
+            </div>
+
+           
+
+        
+        </div>
+
+    
+
+
+    </selection>
