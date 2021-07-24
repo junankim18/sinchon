@@ -1,0 +1,284 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100&display=swap');
+@font-face {
+    font-family: 'UhBeeSeulvely';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_five@.2.0/UhBeeSeulvely.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    }
+*{
+    font-family: 'Noto Sans KR', sans-serif;
+}
+:root{
+    --text-color:
+
+}
+/*var()*/
+
+* {
+    box-sizing: border-box;
+  }
+
+body{
+
+    margin: 0;
+    height: auto;
+    background-color: #FBFCEA;
+    
+}
+
+.navbar{
+    display:  flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FBFCEA;
+
+}
+
+a{
+    font-family: 'UhBeeSeulvely';
+    text-decoration: none;
+    color: #592F61;
+}
+
+
+.navbar_logo{
+    font-size: 24px;
+    margin-left: 15pt;
+    color:#FBFCEA;
+
+}
+
+
+.navbar_logo i{
+    color:#592F61;
+    margin-left: 12px;
+}
+
+.navbar_menu {
+    display: flex;
+    list-style: none;
+    padding-left: 0;
+    color:#592F61;
+}
+
+.navbar_menu li {
+    padding: 8px 12px;
+    margin-left: 50px;
+}
+.navbar_menu li:hover{
+    background-color: #592F61;
+    border-radius: 4px;
+}
+
+.navbar_icons ul{
+    font-size: 20px;
+    list-style: none;
+    color: #592F61;
+    display: flex;
+    margin: 0;
+
+}
+
+.navbar_icons li{
+    padding: 8px 12px;
+} 
+
+.navbar_icons li:hover{
+    background-color:  #592F61;
+    border-radius: 4px;
+}
+
+
+
+.navbar_toggleBtn {
+    display: none;
+    position: absolute;
+    right: 32px;
+    font-size: 24px;
+    color: black;
+}
+
+@media screen and (max-width:1080px){
+    .navbar{
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 8px 24px;
+
+    }
+    .navbar_menu{
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .navbar_menu li{
+        width: 100%;
+        text-align: center;
+    }
+
+    .navbar_icons{
+        display: none;
+        justify-content: center;
+        width: 100%;
+        padding-left: 0;
+        text-align: center;
+    }
+    .navbar_icons ul{
+        padding-left: 0;
+        justify-content: center;
+ 
+    }
+
+    .navbar_toggleBtn{
+        display: block;
+    }
+
+    .navbar_menu.active,
+    .navbar_icons.active {
+        display: flex;
+    }
+
+   
+
+
+}
+
+
+footer{
+    width: 100%;
+    height: 100px;
+
+    display:  flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(243, 244, 250);
+
+    font-size: 10px;
+
+}
+
+footer ul{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+footer ul li{
+    list-style: none;
+}
+
+/*중간 네브 */
+
+nav{
+    display: flex;
+    justify-content: space-between;
+}
+
+.mid{
+    width: 100%;
+
+}
+
+.navbar_logo{
+    
+    justify-content: center;
+    align-items: center;
+}
+
+
+/*
+main 내 글 뜨는 곳
+*/
+
+
+.big_box{
+    display: grid;
+    margin-left: 30px;
+
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+
+    gap: 1px;
+}
+
+
+
+.box{
+    
+
+    width: 200px;
+    height: 100px;
+
+    border-style: solid;
+    border-color: black;
+
+    
+
+}
+
+header,main .diary,main .diary .wrapper{
+    display:flex;
+    flex-direction:column}
+
+.wrapper{width:80%}
+
+.diary_header{display:flex;justify-content:space-between;
+    margin-bottom:25px;
+    align-items:flex-end}
+
+.diary_header h4{font-size:20px;
+
+}
+
+.diary_header h5{
+    font-size: 15px;
+    letter-spacing:2px;
+    
+}
+
+.diary img{width:100%;
+    border-radius: 5px;
+}
+
+.diary img:hover{
+    box-shadow: 10px 5px 5px rgba(0, 0, 255, .2);
+}
+
+/*남의 글*/
+
+
+.big_box2{
+    display: grid;
+    margin-left: 30px;
+
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+
+    gap: 1px;
+}
+
+
+@media screen and (max-width:10000px){
+
+    .big_box2{
+        display: none;
+
+    }
+
+    .big_box2.active{
+        display: grid;
+    
+    }
+    
+    
+    .big_box{
+        display: none;
+    }
+
+    .big_box.active{
+        display: grid;
+    }
+
+
+}

@@ -1,0 +1,24 @@
+section{
+    width: 100%;
+    height: 90vh;
+    
+    background-color: #592F61;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: auto;
+
+    color: #FBFCEA;
+}
+
+
+.section_text:hover{
+    background-color: rgba(29, 29, 29, 0.1);
+    border-radius: 10px;
+}
+
+.open p{
+    color:#FBFCEA;
+}
